@@ -1,10 +1,10 @@
 export default function getNeighborhoodsList() {
-  let sanFranciscoNeighborhoods = ['SOMA', 'Union Square'];
+  const sanFranciscoNeighborhoods = ['SOMA', 'Union Square'];
 
-  return{
+  return {
     addNeighborhood: (newNeighborhood) => {
-       sanFranciscoNeighborhoods.push(newNeighborhood);
-       return sanFranciscoNeighborhoods;
-     }
-  }
+      sanFranciscoNeighborhoods.push(newNeighborhood);
+      return sanFranciscoNeighborhoods;
+    },
+  };
 }
