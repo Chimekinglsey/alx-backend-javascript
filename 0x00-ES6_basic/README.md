@@ -1,0 +1,1 @@
+Project 1: Basics of EcmaScript_6. Choosing `const` and `let` over `var`
