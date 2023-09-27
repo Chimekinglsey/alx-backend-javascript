@@ -1,9 +1,7 @@
 // return a promise: console.log(response instanceof Promise);
 function getResponseFromAPI() {
-  const url = true;
-  return new Promise((resolve, reject) => {
-    if (url) resolve(url);
-    else reject(Error(('url is false')));
+  return new Promise((resolve) => {
+    resolve(true);
   });
 }
 // testing the funtion so jest can let me go
