@@ -2,7 +2,7 @@
 export default function handleResponseFromAPI(promise) {
   const obj = {
     status: 200,
-    body: 'Success',
+    body: 'Success'
   }
   return promise
     .then(() => (obj))//bracketed obj because 
