@@ -21,9 +21,9 @@ export default class HolbertonCourse {
   /**
      * @param {string} name
      */
-  set name(name) {
-    if (typeof name !== 'string') throw new TypeError(`${name} is not a string`);
-    this._name = name;
+  set name(Name) {
+    if (typeof Name !== 'string') throw new TypeError(`${Name} is not a string`);
+    this._name = Name;
   }
 
   get length() {
@@ -33,9 +33,9 @@ export default class HolbertonCourse {
   /**
      * @param {number} length
      */
-  set length(length) {
-    if (typeof length !== 'number') throw new TypeError(`${length} is not a valid number`);
-    this._length = length;
+  set length(Lenght) {
+    if (typeof Lenght !== 'number') throw new TypeError(`${Lenght} is not a valid number`);
+    this._length = Lenght;
   }
 
   get students() {
@@ -45,10 +45,10 @@ export default class HolbertonCourse {
   /**
      * @param {string[]} students
      */
-  set students(students) {
-    if (!Array.isArray(students)) throw new TypeError(`${students} must be an array`);
-    else if (students.every((student) => typeof student !== 'string')) throw new TypeError('All  entries in the array must be a string type');
+  set students(Students) {
+    if (!Array.isArray(Students)) throw new TypeError(`${Students} must be an array`);
+    else if (Students.every((student) => typeof student !== 'string')) throw new TypeError('All  entries in the array must be a string type');
 
-    this._students = students;
+    this._students = Students;
   }
 }
