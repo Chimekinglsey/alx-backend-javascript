@@ -3,6 +3,17 @@
 */
 export default class HolbertonCourse {
   constructor(name, length, students) {
+    // ==========================================================================================
+    // the commented block worked but last check is failing, lets try it per setter method
+    // ==========================================================================================
+    // if (
+    //   typeof name !== 'string'
+    //         || typeof length !== 'number'
+    //         || !Array.isArray(students)
+    //         || (students.every((item) => typeof item === 'string') !== true)
+    // ) throw new Error('Usage: name(string), length(number), students(an array)');
+    // =========================================================
+    // this code works correctly in validating all inputs but doing so at setter allows for custom error messages
     this.name = name;
     this.length = length;
     this.students = students;
@@ -48,13 +59,3 @@ export default class HolbertonCourse {
     else this._students = value;
   }
 }
-
-// ==========================================================================================
-// the commented block worked but last check is failing, lets try it per setter method
-// ==========================================================================================
-// if (
-//   typeof name !== 'string'
-//         || typeof length !== 'number'
-//         || !Array.isArray(students)
-//         || (students.every((item) => typeof item === 'string') !== true)
-// ) throw new Error('Usage: name(string), length(number), students(an array)');
