@@ -13,7 +13,8 @@ export default class HolbertonCourse {
     //         || (students.every((item) => typeof item === 'string') !== true)
     // ) throw new Error('Usage: name(string), length(number), students(an array)');
     // =========================================================
-    // this code works correctly in validating all inputs but doing so at setter allows for custom error messages
+    // this code works correctly in validating all inputs but doing so at setter allows
+    // for custom error messages
     this.name = name;
     this.length = length;
     this.students = students;
