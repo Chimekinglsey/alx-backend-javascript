@@ -1,5 +1,5 @@
 // append handlers
-export default async function handleResponseFromAPI(promise) {
+export default function handleResponseFromAPI(promise) {
     const obj = {
       status: 200,
       body: 'Success',
@@ -8,7 +8,7 @@ export default async function handleResponseFromAPI(promise) {
     .then(() => obj)
     .catch((error)=> new Error())
     .finally(()=>console.log('Got a response from the API'))
-
+// commented out async to test this
 //   try {
 //     const result = await promise;
 
