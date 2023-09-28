@@ -3,9 +3,9 @@ export default function handleResponseFromAPI(promise) {
   const obj = {
     status: 200,
     body: 'Success',
-  };
+  }
   return promise
-    .then(() => (obj))
+    .then(() => (obj))//bracketed obj because 
     .catch(() => new Error())
     .finally(() => console.log('Got a response from the API'));
   // commented out async to test this
