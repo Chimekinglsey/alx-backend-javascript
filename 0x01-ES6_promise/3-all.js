@@ -1,8 +1,8 @@
 // retrieves functions what return promises and display their data
 import { uploadPhoto, createUser } from './utils';
 
-// const { firstName, lastName } = createUser;
-// const { body } = uploadPhoto;
+// const { firstName, lastName } = createUser();
+// const { body } = uploadPhoto();
 export default function handleProfileSignup() {
   return Promise.all([uploadPhoto(), createUser()])
     .then((result) => console.log(`${result[0].body} ${result[1].firstName} ${result[1].lastName}`))
