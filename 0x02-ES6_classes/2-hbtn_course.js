@@ -1,64 +1,52 @@
-/**
- * Represents a Holberton Course.
- */
+/*
+* this file contains a class for creating HolbertonCourse
+*/
 export default class HolbertonCourse {
-  /**
-     * Creates a new @see {@link HolbertonCourse}.
-     *
-     * @param {String} name - The name of the course.
-     * @param {Number} length - How long the course is (in months).
-     * @param {String[]} students - The names of students in the course.
-     */
   constructor(name, length, students) {
-    this.name = name;
-    this.length = length;
-    this.students = students;
+    this._name = name;
+    this._length = length;
+    this._students = students;
   }
 
-  /**
-     * Gets the name of this course.
-     */
+  // getter method for name
   get name() {
     return this._name;
   }
 
   /**
-     * Sets the name of this course.
+     * @param {string} name
      */
   set name(value) {
-    if (typeof value !== 'string') {
-      throw new TypeError('Name must be a string');
-    }
+    if (typeof value !== 'string') throw new TypeError('Name must be a string');
     this._name = value;
   }
 
-  /**
-     * Gets the length of this course (in months).
-     */
+  // getter method for lenght
   get length() {
     return this._length;
   }
 
   /**
-     * Sets the length of this course (in months).
+     * @param {number} length
      */
   set length(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('Length must be a number');
-    }
+    if (typeof value !== 'number') throw new TypeError('Length must be a number');
     this._length = value;
   }
 
-  /**
-     * Gets the names of students in this course.
-     */
+  // getter for students array
   get students() {
     return this._students;
   }
 
   /**
-     * Sets the names of students in this course.
+   * @param {string[]} students
      */
+  //   set students(value) {
+  //     if (!(value instanceof Array)) throw new TypeError('students must be an array');
+  //     if (value.every((student) => typeof student !== 'string')) throw new TypeError('All  entries in the array must be a string');
+  //     else this._students = value;
+  //   }
   set students(value) {
     if (!(value instanceof Array)) {
       throw new TypeError('Students must be an array of strings');
@@ -69,3 +57,13 @@ export default class HolbertonCourse {
     this._students = value;
   }
 }
+
+// ==========================================================================================
+// the commented block worked but last check is failing, lets try it per setter method
+// ==========================================================================================
+// if (
+//   typeof name !== 'string'
+//         || typeof length !== 'number'
+//         || !Array.isArray(students)
+//         || (students.every((item) => typeof item === 'string') !== true)
+// ) throw new Error('Usage: name(string), length(number), students(an array)');
