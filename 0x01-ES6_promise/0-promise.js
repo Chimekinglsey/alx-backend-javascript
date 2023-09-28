@@ -1,5 +1,5 @@
 // return a promise: console.log(response instanceof Promise);
-function getResponseFromAPI() {
+export default function getResponseFromAPI() {
   return new Promise((resolve) => {
     resolve(true);
   });
