@@ -3,9 +3,8 @@
  */
 import Currency from './3-currency';
 
-export default class Pricing extends Currency {
+export default class Pricing {
   constructor(amount, currency) {
-    super(currency.code, currency.name);
     this.amount = amount;
     this.currency = currency;
   }
@@ -32,7 +31,7 @@ export default class Pricing extends Currency {
      * @param {number} currency
      */
   set currency(value) {
-    if (!(value instanceof Currency)) throw new Error('currency must be a number');
+    // if (!(value instanceof Currency)) throw new Error('currency must be a number');
     this._currency = value;
   }
 
