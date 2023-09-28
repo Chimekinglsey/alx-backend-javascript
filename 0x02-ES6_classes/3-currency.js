@@ -1,3 +1,7 @@
+/**
+ * This class creates and displays the name of a currency 
+ * alongside it's symbol or code
+ */
 export default class Currency {
   constructor(code, name) {
     this.code = code;
