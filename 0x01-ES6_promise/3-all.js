@@ -1,10 +1,10 @@
 // retrieves functions what return promises and display their data
 import { uploadPhoto, createUser } from './utils';
 
-const { firstName, lastName } = createUser;
-const { body } = uploadPhoto;
+// const { firstName, lastName } = createUser;
+// const { body } = uploadPhoto;
 export default function handleProfileSignup() {
   return Promise.all([uploadPhoto, createUser])
-    .then(() => console.log(`${body} ${firstName} ${lastName}`))
+    .then((result) => console.log(`${result[0].body} ${result[1].firstName} ${result[1].lastName}`))
     .catch(() => console.log('Signup system offline'));
 }
