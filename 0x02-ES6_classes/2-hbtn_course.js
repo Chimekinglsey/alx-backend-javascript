@@ -5,9 +5,7 @@ export default class HolbertonCourse {
             || typeof length !== 'number'
             || !Array.isArray(students)
             || (students.every((item) => typeof item === 'string') !== true)
-    ) console.error(('Usage: name(string), length(number), students(an array)'));
-
-    // throw new Error(`Usage: name(string), length(number), students(an array)`)
+    ) throw new Error('Usage: name(string), length(number), students(an array)');
     this._name = name;
     this._length = length;
     this._students = students;
