@@ -10,9 +10,9 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
 }
 
 // export default function handleProfileSignup(firsName, lastName, fileName) {
-//   return Promise.allSettled([signUpUser(firsName, lastName), uploadPhoto(fileName)])
+//   return Promise.allSettled([signUpUser(firstName, lastName), uploadPhoto(fileName)])
 //     .then((result) => {
-//       for (const func of result) {
+//       for (let func of result) {
 //         if (func.value !== 'fulfilled') {
 //           func.value = func.reason
 //             [
