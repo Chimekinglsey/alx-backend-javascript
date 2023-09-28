@@ -5,7 +5,10 @@ export default function handleResponseFromAPI(promise) {
 //     body: 'Success',
 //   };
   return promise
-    .then(() => ({ status: 200, body: 'Success' }))// bracketed obj because
+    .then(() => {
+      const obj = { status: 200, body: 'Success' };
+      return obj;
+    })// bracketed obj because
     .catch(() => new Error())
     .finally(() => console.log('Got a response from the API'));
   // commented out async to test this
