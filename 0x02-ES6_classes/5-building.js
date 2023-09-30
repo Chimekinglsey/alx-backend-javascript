@@ -27,7 +27,7 @@ export default class Building {
     }
   }
 
-  // this method should be overridden by child classes
+  // this method should be overwritten by child classes
   static evacuationWarningMessage() {
     throw new Error('Child classes extending Building must implement the evacuationWarningMessage method.');
   }
