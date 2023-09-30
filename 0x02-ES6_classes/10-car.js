@@ -52,6 +52,7 @@ export default class Car {
     //     const clone = Object.create(Object.getPrototypeOf(this))
     //     return Object.assign(clone,this)
     //     return new this.constructor(this.brand, this.motor, this.color);
+    // All the above copies property values...[Symbol.specie] doesn't
     const Species = this.constructor[Symbol.species];
     return new Species();
   }
