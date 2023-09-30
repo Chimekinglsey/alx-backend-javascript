@@ -22,7 +22,6 @@ export default class SkyHighBuilding extends Building {
   }
 
   evacuationWarningMessage() {
-    this.message = `Evacuate slowly the ${this._floors} floors`;
-    return this.message;
+    return `Evacuate slowly the ${this._floors} floors`;
   }
 }
