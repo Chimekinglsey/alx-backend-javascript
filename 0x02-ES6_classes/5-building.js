@@ -28,4 +28,7 @@ export default class Building {
   }
 
   // A method that child classes are expected to override
+  evacuationWarningMessage() {
+    throw new Error('Child classes extending Building must implement the evacuationWarningMessage method.');
+  }
 }
