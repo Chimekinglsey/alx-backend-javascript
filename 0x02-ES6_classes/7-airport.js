@@ -31,8 +31,10 @@ export default class Airport {
     else throw new TypeError('Code is expected to be a string');
   }
 
-  // changing the default toString()
-  toString() {
-    return `[${this._code}]`;
+  // changing the default behaviour of Airport.toString() using[Symbol.toStringTag]
+  // this Object.prototype.toString(). Creating a toString() method won't affect the obj prototype
+
+  get [Symbol.toStringTag] (){
+    return `${this._code}`;
   }
 }
