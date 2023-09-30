@@ -1,6 +1,13 @@
 import Car from './10-car';
 
 export default class EVCar extends Car {
+  /**
+     *
+     * @param {string} brand
+     * @param {string} motor
+     * @param {string} color
+     * @param {string} range
+     */
   constructor(brand, motor, color, range) {
     super(brand, motor, color);
     this.range = range;
