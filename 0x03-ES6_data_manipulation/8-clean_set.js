@@ -1,6 +1,6 @@
 export default function cleanSet(set, startString) {
-  if (!(set instanceof Set) || typeof startString !== 'string') throw new TypeError('set must be an instance of a Set. startString must be a string');
-
+  if (!(set instanceof Set) || typeof startString !== 'string' || !set || !startString)
+    return ""
   const matches = [];
   set.forEach((key) => {
     if (typeof key === 'string' && key.startsWith(startString) && startString.length > 0) {
