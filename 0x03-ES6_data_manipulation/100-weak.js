@@ -2,10 +2,11 @@
 export const weakMap = new WeakMap();
 
 export function queryAPI(endpoint) {
-  if (typeof endpoint !== 'object') throw new Error('Endpoint must be an object');
-  const count = weakMap.get(endpoint) || 0;
-  if (count >= 5) {
-    throw new Error('Endpoint load is high');
+  const count = weakMap.get(endpoint) || 0; // compressed if...else
+//   if (!weakMap.has(endpoint)) {
+//     weakMap.set(endpoint, 1);
+    if (count >= 5) {
+      throw new Error('Endpoint load is high');
+    }
+    weakMap.set(endpoint, count + 1);
   }
-  weakMap.set(endpoint, count + 1);
-}
