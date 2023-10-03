@@ -5,7 +5,8 @@ export default function cleanSet(set, startString) {
   set.forEach((key) => {
     if (typeof key === 'string' && key.startsWith(startString) && startString.length > 0) {
       // substring(remove) removes the startString and appends the rest
-      matches.push(key.substring(startString.length));
+      if(key.substring(startString.length) !== key)
+        matches.push(key.substring(startString.length));
     }
   });
 
