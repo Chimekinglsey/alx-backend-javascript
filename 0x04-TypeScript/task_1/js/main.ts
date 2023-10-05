@@ -47,5 +47,25 @@ console.log(printTeacher("John", "Doe"));
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
-const teacher: printTeacherFunction = printTeacher("John", "Doe");
-console.log(teacher); // Output: J. Doe
+const teacher: printTeacherFunction = printTeacher;
+console.log(teacher("John", "Doe")); // Output: J. Doe
+
+/**
+ * STUDENT CLASS
+ */
+class StudentClass{
+  firstName: string;
+  lastName: string;
+  constructor (firstName: string, lastName: string){
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework = () => "Currently working";
+  displayName() {
+    return this.firstName;
+  }
+} 
+const student1 = new StudentClass("James", "Willis")
+  console.log(student1.displayName());
+  
