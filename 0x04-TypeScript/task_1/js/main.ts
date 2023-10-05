@@ -1,7 +1,7 @@
 interface Teacher{
   firstName: string;
   lastName: string;
-  readonly fullTimeEmployee: boolean;
+  readonly fullTimeEmployee?: boolean;
   yearsOfExperience?: number;
   readonly location: string;
   [key: string]: any;
@@ -21,8 +21,31 @@ const teacher4: Teacher = {
   location: 'London',
   referal: teacher3,
 };
-
-
-console.log(teacher3);
 // console.log(teacher4);
+// console.log(teacher3);
 
+// Interface Inheritance: Directors should extend Teacher interface
+interface Directors extends Teacher{
+  numberOfReports: number;
+}
+const director1: Directors = {
+  firstName: 'John',
+  doesnt_look_bad: true,
+  lastName: "Doe",
+  location: "London",
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+}
+// console.log(director1);
+
+// A function that prints Teacher info
+const printTeacher = (firstName: string, lastName: string) => {
+  return`${firstName[0]}. ${lastName}`
+  // return `${firstName.slice(0,1)}. ${lastName}`
+}
+console.log(printTeacher("John", "Doe"));
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+const teacher: printTeacherFunction = printTeacher("John", "Doe");
+console.log(teacher); // Output: J. Doe
