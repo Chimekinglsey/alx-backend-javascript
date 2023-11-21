@@ -1,108 +1,59 @@
 const http = require('http');
-const fs = require('fs');
+const fs = require('fs').promises;
+
+const app = http.createServer(async (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+
+  if (req.url === '/') {
+    res.end('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    try {
+      // Assuming you pass the database filename as a command-line argument
+      const dbPath = process.argv[2];
+
+      const countStudents = async () => {
+        const content = await fs.readFile(dbPath, 'utf-8');
+        const lines = content.split('\n');
+
+        const validLines = lines.filter((line) => line.trim() !== '');
+        const totalStudents = validLines.length - 1;
+
+        const fieldCounts = {
+          CS: [],
+          SWE: [],
+        };
+
+        if (totalStudents > 0) {
+          for (const line of validLines) {
+            const fields = line.split(',');
+            const field = fields[3] ? fields[3].trim() : '';
+
+            if (field === 'SWE') {
+              fieldCounts.SWE.push(fields[0]);
+            } else if (field === 'CS') {
+              fieldCounts.CS.push(fields[0]);
+            }
+          }
+
+          return { totalStudents, fieldCounts };
+        }
+        throw new Error('No valid students found in the database');
+      };
+
+      const { totalStudents, fieldCounts } = await countStudents();
+      const response = `This is the list of our students\nNumber of students: ${totalStudents}\nNumber of students in CS: ${fieldCounts.CS.length}. List: ${fieldCounts.CS.join(', ')}\nNumber of students in SWE: ${fieldCounts.SWE.length}. List: ${fieldCounts.SWE.join(', ')}`;
+      res.end(response);
+    } catch (error) {
+      res.end(`Error: ${error.message}`);
+    }
+  } else {
+    res.end('404 Not Found');
+  }
+});
 
 const PORT = 1245;
-const HOST = 'localhost';
-const app = http.createServer();
-const DB_FILE = process.argv.length > 2 ? process.argv[2] : '';
-
-/**
- * Counts the students in a CSV data file.
- * @param {String} dataPath The path to the CSV data file.
- */
-const countStudents = (dataPath) => new Promise((resolve, reject) => {
-  if (!dataPath) {
-    reject(new Error('Cannot load the database'));
-    return;
-  }
-
-  fs.readFile(dataPath, 'utf-8', (err, data) => {
-    if (err) {
-      reject(new Error('Cannot load the database'));
-      return;
-    }
-
-    try {
-      const reportParts = [];
-      const fileLines = data.trim().split('\n');
-      const studentGroups = {};
-      const dbFieldNames = fileLines[0].split(',');
-      const studentPropNames = dbFieldNames.slice(0, dbFieldNames.length - 1);
-
-      for (const line of fileLines.slice(1)) {
-        const studentRecord = line.split(',');
-        const studentPropValues = studentRecord.slice(0, studentRecord.length - 1);
-        const field = studentRecord[studentRecord.length - 1];
-        if (!Object.keys(studentGroups).includes(field)) {
-          studentGroups[field] = [];
-        }
-        const studentEntries = studentPropNames.map((propName, idx) => [
-          propName,
-          studentPropValues[idx],
-        ]);
-        studentGroups[field].push(Object.fromEntries(studentEntries));
-      }
-
-      const totalStudents = Object.values(studentGroups).flat().length;
-      reportParts.push(`Number of students: ${totalStudents}`);
-      for (const [field, group] of Object.entries(studentGroups)) {
-        reportParts.push(`Number of students in ${field}: ${group.length}.`);
-        reportParts.push(`List: ${group.map((student) => student.firstname).join(', ')}`);
-      }
-
-      resolve(reportParts.join('\n'));
-    } catch (error) {
-      reject(new Error('Error processing the database'));
-    }
-  });
-});
-
-const SERVER_ROUTE_HANDLERS = [
-  {
-    route: '/',
-    handler(_, res) {
-      const responseText = 'Hello Holberton School!';
-
-      res.setHeader('Content-Type', 'text/plain');
-      res.setHeader('Content-Length', responseText.length);
-      res.statusCode = 200;
-      res.write(Buffer.from(responseText));
-      res.end();
-    },
-  },
-  {
-    route: '/students',
-    async handler(_, res) {
-      const responseParts = ['This is the list of our students'];
-
-      try {
-        const report = await countStudents(DB_FILE);
-        responseParts.push(report);
-      } catch (err) {
-        responseParts.push(err instanceof Error ? err.message : err.toString());
-      } finally {
-        const responseText = responseParts.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', responseText.length);
-        res.statusCode = 200;
-        res.write(Buffer.from(responseText));
-        res.end();
-      }
-    },
-  },
-];
-
-app.on('request', (req, res) => {
-  for (const routeHandler of SERVER_ROUTE_HANDLERS) {
-    if (routeHandler.route === req.url) {
-      routeHandler.handler(req, res);
-      break;
-    }
-  }
-});
-
-app.listen(PORT, HOST, () => {
-  process.stdout.write(`Server listening at -> http://${HOST}:${PORT}\n`);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
 
 module.exports = app;
