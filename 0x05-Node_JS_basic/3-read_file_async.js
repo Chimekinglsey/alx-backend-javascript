@@ -38,7 +38,7 @@ const countStudents = (dbPath) => new Promise((resolve, reject) => {
         reject(new Error('No valid students found in the database'));
       }
     })
-    .catch((error) => {
+    .catch(() => {
       reject(new Error('Cannot load the database'));
     });
 });
