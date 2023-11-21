@@ -7,8 +7,8 @@ const countStudents = (dbPath) => {
     const totalStudents = lines.length - 1;
     const CSfield = [];
     const SWEfield = [];
-    const f1 = 'SWE'
-    const f2 = 'CS'
+    const f1 = 'SWE';
+    const f2 = 'CS';
     if (totalStudents > 0) {
       for (const line of lines) {
         if (!line.endsWith(' ')) {
