@@ -7,8 +7,8 @@ const countStudents = (dbPath) => {
     const totalStudents = lines.length - 1;
     const CSfield = [];
     const SWEfield = [];
-    const f1 = 'SWE';
-    const f2 = 'CS';
+    const f1 = 'SWE'
+    const f2 = 'CS'
     if (totalStudents > 0) {
       for (const line of lines) {
         if (!line.endsWith(' ')) {
@@ -19,8 +19,8 @@ const countStudents = (dbPath) => {
         }
       }
       console.log(`Number of students: ${totalStudents}`);
-      console.log(`Number of students in ${f1}: ${CSfield.length}. List: ${CSfield.join(', ')}`);
-      console.log(`Number of students in ${f2}: ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
+      console.log(`Number of students in ${f2}: ${CSfield.length}. List: ${CSfield.join(', ')}`);
+      console.log(`Number of students in ${f1}: ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
