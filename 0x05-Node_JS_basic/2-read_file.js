@@ -9,10 +9,12 @@ const countStudents = (dbPath) => {
     const SWEfield = [];
     if (totalStudents > 0) {
       for (const line of lines) {
-        const fields = line.split(',');
-        const field = fields.length - 1;
-        if (fields[field] === 'SWE') SWEfield.push(fields[0]);
-        else if (fields[field] === 'CS') CSfield.push(fields[0]);
+        if (!line.endsWith(' ')) {
+          const fields = line.split(',');
+          const field = fields.length - 1;
+          if (fields[field] === 'SWE') SWEfield.push(fields[0]);
+          else if (fields[field] === 'CS') CSfield.push(fields[0]);
+        }
       }
       console.log(`Number of students: ${totalStudents}`);
       console.log(`Number of students in 'CS': ${CSfield.length}. List: ${CSfield.join(', ')}`);
