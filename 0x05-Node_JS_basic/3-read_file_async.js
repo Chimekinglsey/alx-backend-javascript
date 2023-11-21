@@ -9,9 +9,11 @@ const countStudents = (dbPath) => new Promise((resolve, reject) => {
       const totalStudents = validLines.length - 1;
 
       const fieldCounts = {
-        CS: [],
         SWE: [],
+        CS: [],
       };
+
+      let result = 'This is the list of our students\n';
 
       if (totalStudents > 0) {
         for (const line of validLines) {
@@ -25,15 +27,16 @@ const countStudents = (dbPath) => new Promise((resolve, reject) => {
           }
         }
 
-        console.log(`Number of students: ${totalStudents}`);
+        result += `Number of students: ${totalStudents}\n`;
         for (const field in fieldCounts) {
           if (field) {
             const count = fieldCounts[field].length;
-            console.log(`Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}`);
+            result += `Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}\n`;
           }
         }
 
-        resolve();
+        resolve(result);
+        process.stdout.write(result)
       } else {
         reject(new Error('No valid students found in the database'));
       }
