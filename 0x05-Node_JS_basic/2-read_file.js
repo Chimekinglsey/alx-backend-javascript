@@ -5,12 +5,12 @@ const countStudents = (dbPath) => {
     const content = fs.readFileSync(dbPath, 'utf-8');
     const lines = content.split('\n');
 
-    const validLines = lines.filter(line => line.trim() !== '');
+    const validLines = lines.filter((line) => line.trim() !== '');
     const totalStudents = validLines.length - 1;
 
     const fieldCounts = {
-      'SWE': [],
-      'CS': []
+      SWE: [],
+      CS: [],
     };
 
     if (totalStudents > 0) {
@@ -19,16 +19,18 @@ const countStudents = (dbPath) => {
         const field = fields[3] ? fields[3].trim() : '';
 
         if (field === 'SWE') {
-          fieldCounts['SWE'].push(fields[0]);
+          fieldCounts.SWE.push(fields[0]);
         } else if (field === 'CS') {
-          fieldCounts['CS'].push(fields[0]);
+          fieldCounts.CS.push(fields[0]);
         }
       }
 
       console.log(`Number of students: ${totalStudents}`);
       for (const field in fieldCounts) {
-        const count = fieldCounts[field].length;
-        console.log(`Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}`);
+        if (field) {
+          const count = fieldCounts[field].length;
+          console.log(`Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}`);
+        }
       }
     }
   } catch (error) {
