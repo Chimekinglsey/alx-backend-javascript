@@ -7,18 +7,20 @@ const countStudents = (dbPath) => {
     const totalStudents = lines.length - 1;
     const CSfield = [];
     const SWEfield = [];
+    const f1 = 'SWE';
+    const f2 = 'CS';
     if (totalStudents > 0) {
       for (const line of lines) {
         if (!line.endsWith(' ')) {
           const fields = line.split(',');
           const field = fields.length - 1;
-          if (fields[field] === 'SWE') SWEfield.push(fields[0]);
-          else if (fields[field] === 'CS') CSfield.push(fields[0]);
+          if (fields[field] === f1) SWEfield.push(fields[0]);
+          else if (fields[field] === f2) CSfield.push(fields[0]);
         }
       }
       console.log(`Number of students: ${totalStudents}`);
-      console.log(`Number of students in CS: ${CSfield.length}. List: ${CSfield.join(', ')}`);
-      console.log(`Number of students in SWE: ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
+      console.log(`Number of students in ${f1}: ${CSfield.length}. List: ${CSfield.join(', ')}`);
+      console.log(`Number of students in ${f2}: ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
