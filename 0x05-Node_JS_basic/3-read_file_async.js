@@ -36,7 +36,7 @@ const countStudents = (dbPath) => new Promise((resolve, reject) => {
         }
 
         resolve(result);
-        process.stdout.write(result)
+        process.stdout.write(result);
       } else {
         reject(new Error('No valid students found in the database'));
       }
