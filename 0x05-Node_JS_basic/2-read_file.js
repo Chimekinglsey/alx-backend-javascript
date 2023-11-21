@@ -1,29 +1,55 @@
 const fs = require('fs');
 
-const countStudents = (dbPath) => {
+function countStudents(path) {
   try {
-    const content = fs.readFileSync(dbPath, 'utf-8');
-    const lines = content.split('\n');
-    const totalStudents = lines.length - 1;
-    const CSfield = [];
-    const SWEfield = [];
-    const f1 = 'SWE';
-    const f2 = 'CS';
-    if (totalStudents > 0) {
-      for (const line of lines) {
-        if (!line.endsWith(' ')) {
-          const fields = line.split(',');
-          const field = fields.length - 1;
-          if (fields[field] === f1) SWEfield.push(fields[0]);
-          else if (fields[field] === f2) CSfield.push(fields[0]);
-        }
+    // Read the database file synchronously
+    const data = fs.readFileSync(path, 'utf8');
+
+    // Split the file into lines and filter out empty lines
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
+
+    // Calculate the total number of students
+    const totalStudents = lines.length - 1; // Subtract 1 to exclude the header line
+
+    // Log the total number of students
+    console.log(`Number of students: ${totalStudents}`);
+
+    // Extract and count students in each field
+    const fieldCounts = {};
+
+    for (let i = 1; i < lines.length; i++) { // Start from index 1 to skip the header line
+      const fields = lines[i].split(',');
+      const field = fields[3].trim(); // Assuming the field is in the fourth column
+
+      if (fieldCounts[field]) {
+        fieldCounts[field]++;
+      } else {
+        fieldCounts[field] = 1;
       }
-      console.log(`Number of students: ${totalStudents}`);
-      console.log(`Number of students in ${f2}: ${CSfield.length}. List: ${CSfield.join(', ')}`);
-      console.log(`Number of students in ${f1}: ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
+    }
+
+    // Log the number of students in each field
+    for (const field in fieldCounts) {
+      console.log(`Number of students in ${field}: ${fieldCounts[field]}. List: ${getFirstNamesList(lines, field)}`);
     }
   } catch (error) {
-    throw new Error('Cannot load the database');
+    // Log an error message if the database is not available
+    console.error('Cannot load the database');
   }
-};
+}
+function getFirstNamesList(lines, field) {
+  const firstNamesList = [];
+
+  for (let i = 1; i < lines.length; i++) { // Start from index 1 to skip the header line
+    const fields = lines[i].split(',');
+    const currentField = fields[3].trim(); // Assuming the field is in the fourth column
+
+    if (currentField === field) {
+      firstNamesList.push(fields[0].trim()); // Assuming the first name is in the first column
+    }
+  }
+
+  return firstNamesList.join(', ');
+}
+
 module.exports = countStudents;
