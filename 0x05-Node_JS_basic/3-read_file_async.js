@@ -1,29 +1,46 @@
-const fs = require('fs/promises')
-function countStudents(path) {
-   const content = new Promise((resolve, reject) => {
-       const file  = fs.readFile(path, 'utf-8')
-        if (file){
-            resolve(file)
+const fs = require('fs').promises;
+
+const countStudents = (dbPath) => new Promise((resolve, reject) => {
+  fs.readFile(dbPath, 'utf-8')
+    .then((content) => {
+      const lines = content.split('\n');
+
+      const validLines = lines.filter((line) => line.trim() !== '');
+      const totalStudents = validLines.length - 1;
+
+      const fieldCounts = {
+        CS: [],
+        SWE: [],
+      };
+
+      if (totalStudents > 0) {
+        for (const line of validLines) {
+          const fields = line.split(',');
+          const field = fields[3] ? fields[3].trim() : '';
+
+          if (field === 'SWE') {
+            fieldCounts.SWE.push(fields[0]);
+          } else if (field === 'CS') {
+            fieldCounts.CS.push(fields[0]);
+          }
         }
-        else reject('Cannot load the database')
+
+        console.log(`Number of students: ${totalStudents}`);
+        for (const field in fieldCounts) {
+          if (field) {
+            const count = fieldCounts[field].length;
+            console.log(`Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}`);
+          }
+        }
+
+        resolve();
+      } else {
+        reject(new Error('No valid students found in the database'));
+      }
     })
-    const SWE = []
-    const CS = []
-    const f1 = 'SWE'
-    const f2 = 'CS'
-    lines = content.split('\n')
-    const totalStudents = -1
-    for (line in lines){
-        if (!line.endsWith(' ')){
-            totalStudents += 1
-            const fields = line.split(',')
-            for (field of fields){
-                if (field.slice(-1) === f1 ) SWE.push(field[0])
-                else if (field.slice(-1) === f2) CS.push(field[0])
-            }
-        }
-    }
-    console.log(`Number of students: ${totalStudents}`);
-    console.log(`Number of students in ${f2}: ${CS.length}. List: ${CS.join(', ')}`);
-    console.log(`Number of students in ${f1}: ${SWE.length}. List: ${SWE.join(', ')}`)
-}
+    .catch((error) => {
+      reject(new Error('Cannot load the database'));
+    });
+});
+
+module.exports = countStudents;
