@@ -17,8 +17,8 @@ const countStudents = (dbPath) => {
         }
       }
       console.log(`Number of students: ${totalStudents}`);
-      console.log(`Number of students in 'CS': ${CSfield.length}. List: ${CSfield.join(', ')}`);
-      console.log(`Number of students in 'SWE': ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
+      console.log(`Number of students in CS: ${CSfield.length}. List: ${CSfield.join(', ')}`);
+      console.log(`Number of students in SWE: ${SWEfield.length}. List: ${SWEfield.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
