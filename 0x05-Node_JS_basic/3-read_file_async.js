@@ -29,7 +29,7 @@ const countStudents = (dbPath) => new Promise((resolve, reject) => {
         for (const field in fieldCounts) {
           if (field) {
             const count = fieldCounts[field].length;
-            process.stdout.write(`Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}\n`);
+            console.log(`Number of students in ${field}: ${count}. List: ${fieldCounts[field].join(', ')}`);
           }
         }
 
