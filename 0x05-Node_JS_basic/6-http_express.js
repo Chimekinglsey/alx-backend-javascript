@@ -9,3 +9,5 @@ app.get('/', (req, resp) => {
 app.listen(port, () => {
   console.log(`Server listening as port  ${port}`);
 });
+
+module.exports = app;
