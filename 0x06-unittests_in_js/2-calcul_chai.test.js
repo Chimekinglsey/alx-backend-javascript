@@ -1,8 +1,8 @@
 const { expect } = require('chai');
-const calculateNumber = require('./1-calcul');
+const calculateNumber = require('./2-calcul_chai');
 
-describe('cALCULATE NUMBERS', () => {
-  describe('sUM', () => {
+describe('calculateNumbers', () => {
+  describe('sum', () => {
     it('should return the rounded "SUM" of two numbers', () => {
       expect(calculateNumber('SUM', 20.5, 10.3), 'Rounded sum of two positive ints').to.equal(31);
       expect(calculateNumber('SUM', 12.2, 3.7), 'Rounded sum of two positive ints').to.equal(16);
@@ -10,7 +10,7 @@ describe('cALCULATE NUMBERS', () => {
     });
   });
 
-  describe('sUBTRACT', () => {
+  describe('subtract', () => {
     it('should return the rounded "DIFFERENCE" of two numbers', () => {
       expect(calculateNumber('SUBTRACT', -0.6, 3), 'Rounded diff of +ve and -ve ints').to.equal(-4);
       expect(calculateNumber('SUBTRACT', 20.0, -10), 'Rounded diff of +ve and -ve ints').to.equal(30);
@@ -18,7 +18,7 @@ describe('cALCULATE NUMBERS', () => {
     });
   });
 
-  describe('dIVIDE', () => {
+  describe('divide', () => {
     it('should return the rounded "DIVISION" of two numbers', () => {
       expect(calculateNumber('DIVIDE', 1, 3.7), 'Rounded division of +ve integers').to.equal(0.25);
       expect(calculateNumber('DIVIDE', 10, 2), 'Rounded division of +ve integers').to.equal(5);
