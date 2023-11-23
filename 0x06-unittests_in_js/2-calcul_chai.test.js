@@ -23,6 +23,8 @@ describe('calculateNumbers', () => {
       expect(calculateNumber('DIVIDE', 1, 3.7), 'Rounded division of +ve integers').to.equal(0.25);
       expect(calculateNumber('DIVIDE', 10, 2), 'Rounded division of +ve integers').to.equal(5);
       expect(calculateNumber('DIVIDE', 10, 0), 'Rounded division by zero').to.be.a('string');
+      expect(calculateNumber('DIVIDE', 0.0, 0), 'Rounded division by zero').to.equal('Error');
+      expect(calculateNumber('DIVIDE', 1.6, 0), 'Rounded division by zero').to.equal('Error');
     });
   });
 });
