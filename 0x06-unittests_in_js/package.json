@@ -13,6 +13,7 @@
     "mocha": "*"
   },
   "dependencies": {
+    "chai-as-promised": "^7.1.1",
     "sinon": "^17.0.1"
   }
 }
