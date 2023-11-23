@@ -1,12 +1,13 @@
 const sinon = require('sinon')
 const Utils = require('./utils')
 const { assert } = require('chai')
+const sendPaymentRequestToApi = require('./3-payment')
 
 describe('sendPaymentRequestToApi', () => {
-    const sendPaymentRequestToApi = (a, b) => Math.round(a) + Math.round(b)
-    const spyUtils = sinon.spy(Utils.calculateNumber)
+    const spyUtils = sinon.spy(Utils, 'calculateNumber')
     it('Should track payment calls and behaviors', () => {
-        assert(sendPaymentRequestToApi(100, 20), spyUtils('SUM', 100, 20) )
+       sendPaymentRequestToApi(100, 20)
+       assert(spyUtils.calledOnceWithExactly('SUM', 100, 20))
+       spyUtils.restore()
     })
-    spyUtils.restore
 })
