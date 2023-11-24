@@ -1,12 +1,12 @@
 const request = require('request')
-const { assert, expect } = require('chai')
+const { expect } = require('chai')
 
 describe('API integration test', () => {
     const url = 'http://localhost:7865/cart'
     it('should return 200 status code', (done) =>{
         request(`${url}/12`, (error, resp) =>{
             if (!error)
-            assert.equal(resp.statusCode, 200)
+            expect(resp.statusCode).to.equal(200)
             else done(error)
             done()
         })
@@ -18,7 +18,7 @@ describe('API integration test', () => {
                 done(error)
             }
             else  {
-                assert.equal(body, 'Payment methods for cart 12')
+                expect(body).to.equal('Payment methods for cart 12')
                 done()
             }
         })
@@ -30,7 +30,7 @@ describe('API integration test', () => {
                 done(error)
             }
             else  {
-                assert.equal(res.statusCode, 404)
+                expect(res.statusCode).to.equal(404)
                 done()
             }
         })
@@ -46,14 +46,14 @@ describe('API integration test', () => {
     
       it('GET /cart/:id returns 404 response for negative number values in :id', (done) => {
         request.get(`${url}-47`, (_err, res, _body) => {
-          expect(res.statusCode).to.be.equal(404);
+          expect(res.statusCode).to.equal(404);
           done();
         });
       });
     
       it('GET /cart/:id returns 404 response for non-numeric values in :id', (done) => {
         request.get(`${url}/d200-44a5-9de6`, (_err, res, _body) => {
-          expect(res.statusCode).to.be.equal(404);
+          expect(res.statusCode).to.equal(404);
           done();
         });
       });
