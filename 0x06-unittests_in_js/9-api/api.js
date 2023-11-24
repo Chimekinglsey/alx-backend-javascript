@@ -8,11 +8,11 @@ app.get('/', (req, res)=>{
 })
 app.get('/cart/:id', (req, res) =>{
     const id = req.params.id;
-    if (/^d+$/.test(id)) {
-        res.send(`Payment methods for cart ${id}`)
-    }
+    res.send(`Payment methods for cart ${id}`)
 })
 
 app.listen(port, () => {
     console.log(`API available on localhost port ${port}`)
 })
+
+module.exports = app;
