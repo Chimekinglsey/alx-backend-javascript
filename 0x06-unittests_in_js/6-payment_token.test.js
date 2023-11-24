@@ -1,11 +1,11 @@
-const expect = require('expect');
+const {expect} = require('chai');
 const getPaymentTokenFromAPI = require('./6-payment_token');
 
 describe('getPaymentTokenFromAPI', () => {
   it('should return payload when `success` is true', () => new Promise((done) => {
     getPaymentTokenFromAPI(true)
       .then((result) => {
-        expect(result).toStrictEqual({ data: 'Successful response from the API' });
+        expect(result).to.deep.equal({ data: 'Successful response from the API' });
         done();
       })
       .catch(done);
@@ -13,7 +13,7 @@ describe('getPaymentTokenFromAPI', () => {
   it('should return false', () => new Promise((done) => {
     getPaymentTokenFromAPI(false)
       .then((result) => {
-        expect(result).toBeFalsy();
+        expect(result).to.be.undefined;
         done();
       })
       .catch((error) =>{
