@@ -4,21 +4,21 @@ const { expect } = require('chai');
 describe('API integration test', () => {
   const url = 'http://localhost:7865/cart';
   it('should return 200 status code', (done) => {
-    request.get(`${url}/12`, (error, resp) => {
-      expect(resp.statusCode).to.be.equal(200);
+    request.get(`${url}/12`, (_err, res, _body) => {
+      expect(res.statusCode).to.be.equal(200);
       done();
     });
   })
 
   it('Should print response body', (done) => {
-    request.get(`${url}/12`, (error, res, body) => {
+    request.get(`${url}/12`, (_err, _res, body) => {
         expect(body).to.be.equal('Payment methods for cart 12');
         done();
     });
   })
 
   it('Should print 404', (done) => {
-    request.get(`${url}/NaN`, (error, res) => {
+    request.get(`${url}/NaN`, (_err, res, _body) => {
         expect(res.statusCode).to.be.equal(404);
         done();
     });
