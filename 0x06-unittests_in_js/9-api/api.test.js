@@ -1,7 +1,7 @@
 const request = require('request')
 const { assert, expect } = require('chai')
 
-describe('Index page', () => {
+describe('API integration test', () => {
     const url = 'http://localhost:7865/cart'
     it('should return 200 status code', (done) =>{
         request(`${url}/12`, (error, resp) =>{
